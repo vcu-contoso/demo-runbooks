@@ -32,6 +32,7 @@ az account set --subscription $Subscription
 # Format is: Workflows.[workflow name].FlowState=[state]
 $settings = ""
 foreach($workflow in $Workflows) {
+    $workflow = $workflow.Trim()
     $settings = $settings + " Workflows." + $workflow + ".FlowState=" + $State
 }
 $settings = $settings.Trim()
