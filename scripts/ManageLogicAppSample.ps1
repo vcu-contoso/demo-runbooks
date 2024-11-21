@@ -25,6 +25,7 @@ $WorkflowsArray = $Workflows.Split(",")
 # Format is: Workflows.[workflow name].FlowState=[state]
 $settings = ""
 foreach($workflow in $WorkflowsArray) {
+    $workflow = $workflow.Trim()
     $settings = $settings + " Workflows." + $workflow + ".FlowState=" + $State
 }
 $settings = $settings.Trim()
