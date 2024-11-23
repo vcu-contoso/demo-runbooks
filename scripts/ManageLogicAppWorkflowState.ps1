@@ -10,7 +10,7 @@ Param
     [String] $LogicApp,
 
     [Parameter (Mandatory= $true)]
-    [String[]] $Workflows,
+    [String] $Workflows,
 
     [Parameter (Mandatory= $true)]
     [String] $State
@@ -28,10 +28,13 @@ az login --identity
 Write-Output("Setting the subscription to: " + $Subscription)
 az account set --subscription $Subscription
 
+# split comma delimited string into array
+$WorkflowsArray = $Workflows.Split(",")
+
 # Create the settings paramerter, which consists of a space-separated list of settings tp set the states of the workflows
 # Format is: Workflows.[workflow name].FlowState=[state]
 $settings = ""
-foreach($workflow in $Workflows) {
+foreach($workflow in $WorkflowsArray) {
     $workflow = $workflow.Trim()
     $settings = $settings + " Workflows." + $workflow + ".FlowState=" + $State
 }
